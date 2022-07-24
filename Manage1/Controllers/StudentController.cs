@@ -28,24 +28,24 @@ namespace Manage1.Controllers
         groupalllist: var groups = _groupRepositories.GetAll();
             if (groups.Count != 0)
             {
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Student Name:");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Student Name:");
                 string name = Console.ReadLine();
 
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Student SurName");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Student SurName");
                 string surname = Console.ReadLine();
 
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Student Age");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Student Age");
                 string age = Console.ReadLine();
                 byte studentAge;
                 bool result = byte.TryParse(age, out studentAge);
 
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.DarkBlue, "All Group");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "All Group");
                 foreach (var gorup in groups)
                 {
-                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, gorup.Name);
+                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, gorup.Name);
                 }
 
-            groupname: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Group Name");
+            groupname: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Name");
                 string groupname = Console.ReadLine();
 
 
@@ -85,7 +85,7 @@ namespace Manage1.Controllers
             }
             else
             {
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "No group");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "This group doesn't exist");
             }
 
 
@@ -166,7 +166,7 @@ namespace Manage1.Controllers
         #region DeleteStudent
         public void DeleteStudent()
         {
-        enterid: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Student Id");
+        enterid: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Student Id");
             string Id = Console.ReadLine();
 
             int id;
@@ -192,7 +192,7 @@ namespace Manage1.Controllers
             }
             else
             {
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "please, enter correct Id");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Please, enter correct Id");
                 goto enterid;
 
             }

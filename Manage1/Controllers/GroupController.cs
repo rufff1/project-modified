@@ -22,9 +22,9 @@ namespace Manage1.Controller
         #region CreateGroup
         public void CreateGroup()
         {
-            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Group Name:");
+            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Name:");
             string name = Console.ReadLine();
-        MaxSize: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Group Max Size:");
+        MaxSize: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Max Size:");
             string size = Console.ReadLine();
 
             int maxSize;
@@ -53,16 +53,16 @@ namespace Manage1.Controller
         public void UpdateGroup()
         {
 
-           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Group Name");
+           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Name");
             string name = Console.ReadLine();
             var group = _groupRepositories.Get(g => g.Name.ToLower() == name.ToLower());
             if (group != null)
             {
                 int oldSize = group.MaxSize;
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter new group name");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter new group name:");
                 string newName = Console.ReadLine();
 
-               size: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter new group size");
+               size: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter new group size:");
                 string size = Console.ReadLine();
 
 
@@ -99,7 +99,7 @@ namespace Manage1.Controller
         #region DeleteGroup
         public void DeleteGroup()
         {
-           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter Group Name");
+           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Name:");
             string name = Console.ReadLine();
             var group = _groupRepositories.Get(g => g.Name.ToLower() == name.ToLower());
 
@@ -122,10 +122,10 @@ namespace Manage1.Controller
         {
 
             var groups = _groupRepositories.GetAll();
-            ConsoleHelpers.WriteTextWithColor(ConsoleColor.DarkBlue, "All Groups:");
+            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "All Groups:");
             foreach (var group in groups)
             {
-                Console.WriteLine($"Group Name:{group.Name} , Max Size:{group.MaxSize}");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"Group Name:{group.Name} , Max Size:{group.MaxSize}");
             }
         }
         #endregion
@@ -133,13 +133,13 @@ namespace Manage1.Controller
         #region GetGroupByName
         public void GetGroupByName()
         {
-           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter group name");
+           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter group name");
             string name = Console.ReadLine();
 
             var group = _groupRepositories.Get(g => g.Name.ToLower() == name.ToLower());
             if (group != null)
             {
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, $"Name:{group.Name}, Max Size:{group.MaxSize}");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"Name:{group.Name}, Max Size:{group.MaxSize}");
             }
             else
             {
@@ -153,7 +153,7 @@ namespace Manage1.Controller
         public void Exit()
         {
 
-            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Thanks for using My App ");
+            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Thanks for using My App ");
         }
         #endregion
 
