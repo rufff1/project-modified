@@ -16,23 +16,26 @@ namespace Manage1
 
             GroupController _groupController = new GroupController();
             StudentController _studentController = new StudentController();
+            AdminController _adminController = new AdminController();
 
 
 
-            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Welcome My First App...");
-            Console.WriteLine("--------------------------------------------------");
 
 
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Please enter username and password");
-            username: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter your username:");
-                string userName = Console.ReadLine();
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter your password:");
-                string password = Console.ReadLine();
 
 
-            while (true)
+        Authentication: var admin = _adminController.Authenticate();
+
+
+            if (admin != null)
             {
-                if (userName == "admin" && password == "admin")
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"Welcome {admin.UserName}");
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Welcome My First App...");
+                Console.WriteLine("--------------------------------------------------");
+
+
+
+                while (true)
                 {
 
                 Mainmenu: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Main Menu:");
@@ -58,7 +61,7 @@ namespace Manage1
                             ConsoleHelpers.WriteTextWithColor(ConsoleColor.Yellow, "5 - Get Group By Name");
                             ConsoleHelpers.WriteTextWithColor(ConsoleColor.Yellow, "6 - Back Main Menu");
                             ConsoleHelpers.WriteTextWithColor(ConsoleColor.Yellow, "0 - Exit");
-                           number: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Select Options:");
+                        number: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Select Options:");
                             number = Console.ReadLine();
                             result = int.TryParse(number, out selectedNumber);
 
@@ -109,7 +112,7 @@ namespace Manage1
                             ConsoleHelpers.WriteTextWithColor(ConsoleColor.Yellow, "5 - Get Student By Group");
                             ConsoleHelpers.WriteTextWithColor(ConsoleColor.Yellow, "6 - Back Main Menu");
                             ConsoleHelpers.WriteTextWithColor(ConsoleColor.Yellow, "0 - Exit");
-                            number1: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Select options:");
+                        number1: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Select options:");
                             number = Console.ReadLine();
                             result = int.TryParse(number, out selectedNumber);
 
@@ -163,16 +166,17 @@ namespace Manage1
 
 
 
-               
-                }
-                else
-                {
-                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Please enter correct username and password for enter");
-                    goto username;
-                }
 
 
+
+
+                }
             }
+            else
+            {
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Enter correct password and username");
+                goto Authentication;
+            }    
         }
     }
 }

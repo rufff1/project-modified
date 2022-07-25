@@ -265,20 +265,21 @@ namespace Manage1.Controllers
             var dbgroup = _groupRepositories.Get(g => g.Name.ToLower() == groupName.ToLower());
             if (dbgroup != null)
             {
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter student id");
+              enterid:  ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, "Enter student id");
                 string studentid = Console.ReadLine();
                 int id;
                 bool resul = int.TryParse(studentid, out id);
 
 
-                var Student = _studentRepositories.Get(s => s.Id == id);
+                var Student = _studentRepositories.Get(s => s.Id == id && s.group.Id==dbgroup.Id);
                 if (Student != null)
                 {
                     ConsoleHelpers.WriteTextWithColor(ConsoleColor.Magenta, $"studentName:{Student.Name}, studentSurname:{Student.Surname}, studentAge:{Student.Age}");
                 }
                 else
                 {
-                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Please correct ID");
+                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "This student doesn't exist group");
+                    goto enterid;
                 }
             }
             else
