@@ -52,46 +52,74 @@ namespace Manage1.Controller
 
         public void UpdateGroup()
         {
-
-           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Name");
-            string name = Console.ReadLine();
-            var group = _groupRepositories.Get(g => g.Name.ToLower() == name.ToLower());
-            if (group != null)
+            var groups = _groupRepositories.GetAll();
+            if (groups.Count > 0)
             {
-                int oldSize = group.MaxSize;
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter new group name:");
-                string newName = Console.ReadLine();
-
-               size: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter new group size:");
-                string size = Console.ReadLine();
 
 
-                int maxSize;
-                bool result = int.TryParse(size, out maxSize);
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.DarkBlue, " All groups:");
+                foreach (var dbgroup in groups)
+                {
+                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, $"Id:{dbgroup.Id}, Name:{dbgroup.Name}");
+                }
+
+            name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Id");
+                string id = Console.ReadLine();
+                int chosenId;
+                bool result = int.TryParse(id, out chosenId);
+
                 if (result)
                 {
-                    var newGroup = new Group
+                    var group = _groupRepositories.Get(g => g.Id == chosenId);
+                    if (group != null)
                     {
-                        Id = group.Id,
-                        Name = newName,
-                        MaxSize = maxSize
-                    };
-                    _groupRepositories.Update(newGroup);
-                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"name:{name}, Max Size:{oldSize} is updated to Name:{newGroup.Name}, Max Size:{newGroup.MaxSize} ");
+
+                        int oldSize = group.MaxSize;
+                        string oldName=group.Name;  
+                        ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter new group name:");
+                        string newName = Console.ReadLine();
+
+                    size: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter new group size:");
+                        string size = Console.ReadLine();
+
+
+                        int maxSize;
+                        result = int.TryParse(size, out maxSize);
+                        if (result)
+                        {
+                            var newGroup = new Group
+                            {
+                                Id = group.Id,
+                                Name = newName,
+                                MaxSize = maxSize
+                            };
+                            _groupRepositories.Update(newGroup);
+                            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"name:{oldName}, Max Size:{oldSize} is updated to Name:{newGroup.Name}, Max Size:{newGroup.MaxSize} ");
+
+                        }
+                        else
+                        {
+                            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Please, Enter correct Group max size");
+                            goto size;
+                        }
+                    }
+                    else
+                    {
+                        ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "this Group ID doesn't exist");
+                   
+                    }
 
                 }
                 else
                 {
-                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Please, Enter correct Group max size");
-                    goto size;
+                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Please, Enter correct Group Id");
+                    goto name;
                 }
-
-
             }
             else
             {
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "Please, Enter correct Group name");
-                goto name;           
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "There are no any groups");
+
             }
         }
         #endregion
@@ -99,19 +127,39 @@ namespace Manage1.Controller
         #region DeleteGroup
         public void DeleteGroup()
         {
-           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Name:");
-            string name = Console.ReadLine();
-            var group = _groupRepositories.Get(g => g.Name.ToLower() == name.ToLower());
-
-            if (group != null)
+            var groups = _groupRepositories.GetAll();
+            if (groups.Count > 0)
             {
-                _groupRepositories.Delete(group);
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"{name} group is successfully deleted");
+
+
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.DarkBlue, "All group:");
+                foreach (var dbgroup in groups)
+                {
+                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, $"Id:{dbgroup.Id}, Name:{dbgroup.Name}");
+                }
+
+            name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Group Id:");
+                string id = Console.ReadLine();
+                int chosenId;
+                var result = int.TryParse(id, out chosenId);
+                var group = _groupRepositories.Get(g => g.Id == chosenId);
+
+                if (group != null)
+                {
+                    string name = group.Name;
+                    _groupRepositories.Delete(group);
+                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"{name} group is successfully deleted");
+                }
+                else
+                {
+                    ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "This group doesn't exist");
+                    goto name;
+
+                }
             }
             else
             {
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "This group doesn't exist");
-                goto name;
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "There are no any groups");
             }
         }
         #endregion
@@ -133,7 +181,7 @@ namespace Manage1.Controller
         #region GetGroupByName
         public void GetGroupByName()
         {
-           name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter group name");
+        name: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter group name");
             string name = Console.ReadLine();
 
             var group = _groupRepositories.Get(g => g.Name.ToLower() == name.ToLower());

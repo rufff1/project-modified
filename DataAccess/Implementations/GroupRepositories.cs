@@ -12,21 +12,42 @@ namespace DataAccess.Implementations
     public class GroupRepositories : IRepositories<Group>
     {
         private static int id; 
+       
         public Group Create(Group entity)
         {
             id++;
-            entity.Id = id; 
+              entity.Id = id;
+            try
+            {
             DbContext.Groups.Add(entity);
-            return entity;  
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+                return entity;  
         }
 
         public void Delete(Group entity)
         {
+            try
+            {
             DbContext.Groups.Remove(entity);
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
         }
 
         public Group Get(Predicate<Group> filter = null)
         {
+            try
+            {
             if (filter==null)
             {
                 return DbContext.Groups[0];
@@ -36,10 +57,20 @@ namespace DataAccess.Implementations
                 return DbContext.Groups.Find(filter);
             }
         
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
         public List<Group> GetAll(Predicate<Group> filter = null)
         {
+            try
+            {
             if (filter==null)
             {
                 return DbContext.Groups;
@@ -48,15 +79,32 @@ namespace DataAccess.Implementations
             {
                 return DbContext.Groups.FindAll(filter);
             }
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
         }
 
         public void Update(Group entity)
         {
+            try
+            {
             var group = DbContext.Groups.Find(g => g.Id == entity.Id);
             if (group !=null)
             {
                 group.Name = entity.Name;
                 group.MaxSize = entity.MaxSize;
+            }
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
             }
         }
     }

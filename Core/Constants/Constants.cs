@@ -12,6 +12,7 @@ namespace Core.Constants
         CreateGroup,
         UpdateGroup,
         DeleteGroup,
+        GetAll,
         AllGroup,
         GetGroupByName,
         BackMainMenu,
@@ -27,6 +28,17 @@ namespace Core.Constants
         GetStudentByGroup,
         BackMainMenu,
     }
+    public enum TeacherOptions
+    {
 
+        Exit,
+        CreateTacher,
+        UpdateTeacher,
+        DeleteTeacher,
+        GetAll,
+        AddGroupToTeacher,
+        GetAllGroupsToTeacher,
+        BackMainMenu,
+    }
 
 }

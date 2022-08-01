@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Implementations
 {
-    public class StudentRepositories : IRepositories<Student>
+    public class TeacherRepositories : IRepositories<Teacher>
     {
         private static int id;
-        public Student Create(Student entity)
+        public Teacher Create(Teacher entity)
         {
             id++;
             entity.Id = id;
             try
             {
-            DbContext.Students.Add(entity);
+            DbContext.Teachers.Add(entity);
 
             }
             catch (Exception e)
@@ -27,13 +27,14 @@ namespace DataAccess.Implementations
                 Console.WriteLine(e.Message);
             }
             return entity;
+            
         }
 
-        public void Delete(Student entity)
+        public void Delete(Teacher entity)
         {
             try
             {
-            DbContext.Students.Remove(entity);
+            DbContext.Teachers.Remove(entity);  
 
             }
             catch (Exception e)
@@ -43,42 +44,17 @@ namespace DataAccess.Implementations
             }
         }
 
-        public Student Get(Predicate<Student> filter = null)
+        public Teacher Get(Predicate<Teacher> filter = null)
         {
-            try
-            {
-            if (filter == null)
-            {
-                return DbContext.Students[0];
-            }
-            else
-            {
-                return DbContext.Students.Find(filter);
-            }
-
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine(e.Message);
-                return null;
-            }
-         
-        
-        }
-
-        public List<Student> GetAll(Predicate<Student> filter = null)
-        {
-
             try
             {
             if (filter==null)
             {
-                return DbContext.Students;
+                return DbContext.Teachers[0];
             }
             else
             {
-                return DbContext.Students.FindAll(filter);  
+                return DbContext.Teachers.Find(filter);
             }
 
             }
@@ -90,17 +66,38 @@ namespace DataAccess.Implementations
             }
         }
 
-        public void Update(Student entity)
+        public List<Teacher> GetAll(Predicate<Teacher> filter = null)
         {
             try
             {
-            if (entity !=null)
+            if (filter==null)
             {
-            var student = DbContext.Students.Find(g => g.Id == entity.Id);
-                student.Name = entity.Name;
-                student.Surname = entity.Surname;
-                student.Age = entity.Age;
+                return DbContext.Teachers;
+            }
+            else
+            {
+                return DbContext.Teachers.FindAll(filter);
+            }
 
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public void Update(Teacher entity)
+        {
+            try
+            {
+            var teacher=DbContext.Teachers.Find(t=> t.Id==entity.Id);
+            if (teacher!=null)
+            {
+                teacher.Name=entity.Name;   
+                teacher.Surname=entity.Surname;
+                teacher.Age = entity.Age;
             }
 
             }
@@ -109,9 +106,7 @@ namespace DataAccess.Implementations
 
                 Console.WriteLine(e.Message);
             }
-
+          
         }
     }
-
-
 }
