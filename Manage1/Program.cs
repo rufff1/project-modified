@@ -66,8 +66,10 @@ namespace Manage1
                         number: ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Select Options:");
                             number = Console.ReadLine();
                             result = int.TryParse(number, out selectedNumber);
+                          
+       
 
-                            if (selectedNumber >= 0 && selectedNumber <= 6)
+                            if (selectedNumber >= 0 && selectedNumber <= 7)
                             {
                                 switch (selectedNumber)
                                 {

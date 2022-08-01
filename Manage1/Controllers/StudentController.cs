@@ -25,7 +25,7 @@ namespace Manage1.Controllers
         public void CreateStudent()
         {
 
-        groupalllist: var groups = _groupRepositories.GetAll();
+         var groups = _groupRepositories.GetAll();
 
             if (groups.Count > 0)
             {
@@ -40,7 +40,7 @@ namespace Manage1.Controllers
                 byte studentAge;
                 bool result = byte.TryParse(age, out studentAge);
 
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.DarkBlue, "All Group:");
+            groupalllist: ConsoleHelpers.WriteTextWithColor(ConsoleColor.DarkBlue, "All Group:");
                 foreach (var group in groups)
                 {
                     ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, $"Id:{group.Id}, Name:{group.Name}");

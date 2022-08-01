@@ -12,7 +12,6 @@ namespace Core.Constants
         CreateGroup,
         UpdateGroup,
         DeleteGroup,
-        GetAll,
         AllGroup,
         GetGroupByName,
         BackMainMenu,

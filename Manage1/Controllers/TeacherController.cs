@@ -131,6 +131,11 @@ namespace Manage1.Controllers
                 }
 
             }
+            else
+            {
+                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "There are no any tecaher");
+                
+            }
         }
 
         #endregion
@@ -190,7 +195,7 @@ namespace Manage1.Controllers
         public void GetAll()
         {
             var teachers = _teacherRepositories.GetAll();
-            ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "All Teacher:");
+            ConsoleHelpers.WriteTextWithColor(ConsoleColor.DarkBlue, "All Teacher:");
             foreach (var teacher in teachers)
             {
                 ConsoleHelpers.WriteTextWithColor(ConsoleColor.Green, $"Teacher Id:{teacher.Id} , Teacher Name:{teacher.Name} , Teacher Surname:{teacher.Surname} , Teacher Age:{teacher.Age}");
@@ -312,7 +317,7 @@ namespace Manage1.Controllers
                     ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, $"Id:{teacher.Id} Full Name:{teacher.Name} {teacher.Surname}");
                 }
 
-                ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Teacher Id:");
+             id:   ConsoleHelpers.WriteTextWithColor(ConsoleColor.Cyan, "Enter Teacher Id:");
                 string id = Console.ReadLine();
                 int teacherId;
                bool result=int.TryParse(id, out teacherId);
@@ -343,6 +348,7 @@ namespace Manage1.Controllers
                 else
                 {
                     ConsoleHelpers.WriteTextWithColor(ConsoleColor.Red, "This  ID in correct format");
+                    goto id;
                 }
 
             }
